@@ -27,9 +27,13 @@ class District
     #[ORM\OneToMany(targetEntity: Commune::class, mappedBy: 'district')]
     private Collection $communes;
 
+    #[ORM\OneToMany(targetEntity: Elections::class, mappedBy: 'District')]
+    private Collection $elections;
+
     public function __construct()
     {
         $this->communes = new ArrayCollection();
+        $this->elections = new ArrayCollection();
     }
 
 
@@ -106,5 +110,35 @@ class District
     public function __toString()
     {
         return $this->nom;
+    }
+
+    /**
+     * @return Collection<int, Elections>
+     */
+    public function getElections(): Collection
+    {
+        return $this->elections;
+    }
+
+    public function addElection(Elections $election): static
+    {
+        if (!$this->elections->contains($election)) {
+            $this->elections->add($election);
+            $election->setDistrict($this);
+        }
+
+        return $this;
+    }
+
+    public function removeElection(Elections $election): static
+    {
+        if ($this->elections->removeElement($election)) {
+            // set the owning side to null (unless already changed)
+            if ($election->getDistrict() === $this) {
+                $election->setDistrict(null);
+            }
+        }
+
+        return $this;
     }
 }

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NiveauElection index{% endblock %}
+
+{% block body %}
+    <h1>NiveauElection index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Niveau</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for niveau_election in niveau_elections %}
+            <tr>
+                <td>{{ niveau_election.id }}</td>
+                <td>{{ niveau_election.niveau }}</td>
+                <td>
+                    <a href="{{ path('app_niveau_election_show', {'id': niveau_election.id}) }}">show</a>
+                    <a href="{{ path('app_niveau_election_edit', {'id': niveau_election.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_niveau_election_new') }}">Create new</a>
+{% endblock %}

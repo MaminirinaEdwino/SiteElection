@@ -3,7 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Administrateur;
+use App\Entity\NiveauAdmin;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,8 +17,11 @@ class AdministrateurType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('niveau')
-            ->add('mdp')
+            ->add('niveau',EntityType::class,[
+                'class'=>NiveauAdmin::class,
+                'choice_label'=>'niveau',
+            ])
+            ->add('mdp', PasswordType::class)
         ;
     }
 

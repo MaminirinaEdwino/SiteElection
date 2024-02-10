@@ -27,9 +27,13 @@ class Commune
     #[ORM\OneToMany(targetEntity: Fokotany::class, mappedBy: 'commune')]
     private Collection $fokotanies;
 
+    #[ORM\OneToMany(targetEntity: Elections::class, mappedBy: 'Commune')]
+    private Collection $elections;
+
     public function __construct()
     {
         $this->fokotanies = new ArrayCollection();
+        $this->elections = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -105,6 +109,36 @@ class Commune
     public function __toString()
     {
         return $this->nom;
+    }
+
+    /**
+     * @return Collection<int, Elections>
+     */
+    public function getElections(): Collection
+    {
+        return $this->elections;
+    }
+
+    public function addElection(Elections $election): static
+    {
+        if (!$this->elections->contains($election)) {
+            $this->elections->add($election);
+            $election->setCommune($this);
+        }
+
+        return $this;
+    }
+
+    public function removeElection(Elections $election): static
+    {
+        if ($this->elections->removeElement($election)) {
+            // set the owning side to null (unless already changed)
+            if ($election->getCommune() === $this) {
+                $election->setCommune(null);
+            }
+        }
+
+        return $this;
     }
 
 }

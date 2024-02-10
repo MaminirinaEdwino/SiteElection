@@ -25,23 +25,43 @@ class Elections
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $fin = null;
 
-    #[ORM\Column]
-    private ?int $candidat = null;
-
-    #[ORM\Column]
-    private ?int $electeur = null;
-
-    #[ORM\Column]
-    private ?float $participation = null;
-
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?Candidats $elu = null;
 
-    #[ORM\Column]
-    private ?float $pourcentage = null;
 
     #[ORM\OneToMany(targetEntity: Electeurs::class, mappedBy: 'election')]
     private Collection $electeurs;
+
+
+    #[ORM\ManyToOne(inversedBy: 'elections')]
+    private ?NiveauElection $niveau = null;
+
+    #[ORM\ManyToOne(inversedBy: 'elections')]
+    private ?Motif $motif = null;
+
+    #[ORM\ManyToOne(inversedBy: 'elections')]
+    private ?Region $Region = null;
+
+    #[ORM\ManyToOne(inversedBy: 'elections')]
+    private ?District $District = null;
+
+    #[ORM\ManyToOne(inversedBy: 'elections')]
+    private ?Commune $Commune = null;
+
+    #[ORM\ManyToOne(inversedBy: 'elections')]
+    private ?Fokotany $Fokotany = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $electeur = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $candidats = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $participation = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $pourcentage = null;
 
     public function __construct()
     {
@@ -90,42 +110,6 @@ class Elections
         return $this;
     }
 
-    public function getCandidat(): ?int
-    {
-        return $this->candidat;
-    }
-
-    public function setCandidat(int $candidat): static
-    {
-        $this->candidat = $candidat;
-
-        return $this;
-    }
-
-    public function getElecteur(): ?int
-    {
-        return $this->electeur;
-    }
-
-    public function setElecteur(int $electeur): static
-    {
-        $this->electeur = $electeur;
-
-        return $this;
-    }
-
-    public function getParticipation(): ?float
-    {
-        return $this->participation;
-    }
-
-    public function setParticipation(float $participation): static
-    {
-        $this->participation = $participation;
-
-        return $this;
-    }
-
     public function getElu(): ?Candidats
     {
         return $this->elu;
@@ -138,17 +122,7 @@ class Elections
         return $this;
     }
 
-    public function getPourcentage(): ?float
-    {
-        return $this->pourcentage;
-    }
 
-    public function setPourcentage(float $pourcentage): static
-    {
-        $this->pourcentage = $pourcentage;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Electeurs>
@@ -176,6 +150,126 @@ class Elections
                 $electeur->setElection(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNiveau(): ?NiveauElection
+    {
+        return $this->niveau;
+    }
+
+    public function setNiveau(?NiveauElection $niveau): static
+    {
+        $this->niveau = $niveau;
+
+        return $this;
+    }
+
+    public function getMotif(): ?Motif
+    {
+        return $this->motif;
+    }
+
+    public function setMotif(?Motif $motif): static
+    {
+        $this->motif = $motif;
+
+        return $this;
+    }
+
+    public function getRegion(): ?Region
+    {
+        return $this->Region;
+    }
+
+    public function setRegion(?Region $Region): static
+    {
+        $this->Region = $Region;
+
+        return $this;
+    }
+
+    public function getDistrict(): ?District
+    {
+        return $this->District;
+    }
+
+    public function setDistrict(?District $District): static
+    {
+        $this->District = $District;
+
+        return $this;
+    }
+
+    public function getCommune(): ?Commune
+    {
+        return $this->Commune;
+    }
+
+    public function setCommune(?Commune $Commune): static
+    {
+        $this->Commune = $Commune;
+
+        return $this;
+    }
+
+    public function getFokotany(): ?Fokotany
+    {
+        return $this->Fokotany;
+    }
+
+    public function setFokotany(?Fokotany $Fokotany): static
+    {
+        $this->Fokotany = $Fokotany;
+
+        return $this;
+    }
+
+    public function getElecteur(): ?int
+    {
+        return $this->electeur;
+    }
+
+    public function setElecteur(?int $electeur): static
+    {
+        $this->electeur = $electeur;
+
+        return $this;
+    }
+
+    public function getCandidats(): ?int
+    {
+        return $this->candidats;
+    }
+
+    public function setCandidats(?int $candidats): static
+    {
+        $this->candidats = $candidats;
+
+        return $this;
+    }
+
+    public function getParticipation(): ?int
+    {
+        return $this->participation;
+    }
+
+    public function setParticipation(?int $participation): static
+    {
+        $this->participation = $participation;
+
+        return $this;
+    }
+
+    public function getPourcentage(): ?int
+    {
+        return $this->pourcentage;
+    }
+
+    public function setPourcentage(?int $pourcentage): static
+    {
+        $this->pourcentage = $pourcentage;
 
         return $this;
     }

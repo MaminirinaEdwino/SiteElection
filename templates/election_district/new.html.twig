@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Elections{% endblock %}
+
+{% block body %}
+    <h1>Create new Elections</h1>
+
+    {{ include('election_district/_form.html.twig') }}
+
+    <a href="{{ path('app_elections_district_index') }}">back to list</a>
+{% endblock %}

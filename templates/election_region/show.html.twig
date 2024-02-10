@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Elections{% endblock %}
+
+{% block body %}
+    <h1>Elections</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ election.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ election.date ? election.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Debut</th>
+                <td>{{ election.debut ? election.debut|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Fin</th>
+                <td>{{ election.fin ? election.fin|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Candidat</th>
+                <td>{{ election.candidats }}</td>
+            </tr>
+            <tr>
+                <th>Electeur</th>
+                <td>{{ election.electeur }}</td>
+            </tr>
+            <tr>
+                <th>Participation</th>
+                <td>{{ election.participation }}</td>
+            </tr>
+            <tr>
+                <th>Pourcentage</th>
+                <td>{{ election.pourcentage }}</td>
+            </tr>
+            <tr>
+                <th>Motif</th>
+                <td>{{ election.motif }}</td>
+            </tr>
+            <tr>
+                <th>Niveau</th>
+                <td>{{ election.niveau }}</td>
+            </tr>
+            <tr>
+                <th>Localisation</th>
+                <td>{{ election.localisation }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_elections_region_index') }}">back to list</a>
+
+    <a href="{{ path('app_elections_region_edit', {'id': election.id}) }}">edit</a>
+
+    {{ include('elections/_delete_form.html.twig') }}
+{% endblock %}

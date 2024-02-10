@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NiveauElection{% endblock %}
+
+{% block body %}
+    <h1>NiveauElection</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ niveau_election.id }}</td>
+            </tr>
+            <tr>
+                <th>Niveau</th>
+                <td>{{ niveau_election.niveau }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_niveau_election_index') }}">back to list</a>
+
+    <a href="{{ path('app_niveau_election_edit', {'id': niveau_election.id}) }}">edit</a>
+
+    {{ include('niveau_election/_delete_form.html.twig') }}
+{% endblock %}

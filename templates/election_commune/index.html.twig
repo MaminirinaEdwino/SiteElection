@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Elections index{% endblock %}
+
+{% block body %}
+    <h1>Elections index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Debut</th>
+                <th>Fin</th>
+                <th>Candidat</th>
+                <th>Electeur</th>
+                <th>Participation</th>
+                <th>Pourcentage</th>
+                <th>Motif</th>
+                <th>Niveau</th>
+                <th>Localisation</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for election in elections %}
+            <tr>
+                <td>{{ election.id }}</td>
+                <td>{{ election.date ? election.date|date('Y-m-d') : '' }}</td>
+                <td>{{ election.debut ? election.debut|date('H:i:s') : '' }}</td>
+                <td>{{ election.fin ? election.fin|date('H:i:s') : '' }}</td>
+                <td>{{ election.candidat }}</td>
+                <td>{{ election.electeur }}</td>
+                <td>{{ election.participation }}</td>
+                <td>{{ election.pourcentage }}</td>
+                <td>{{ election.motif }}</td>
+                <td>{{ election.niveau }}</td>
+                <td>{{ election.localisation }}</td>
+                <td>
+                    <a href="{{ path('app_elections_show', {'id': election.id}) }}">show</a>
+                    <a href="{{ path('app_elections_edit', {'id': election.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_elections_new') }}">Create new</a>
+{% endblock %}

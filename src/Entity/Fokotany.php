@@ -27,9 +27,13 @@ class Fokotany
     #[ORM\OneToMany(targetEntity: Electeurs::class, mappedBy: 'fokotany')]
     private Collection $electeurs;
 
+    #[ORM\OneToMany(targetEntity: Elections::class, mappedBy: 'Fokotany')]
+    private Collection $elections;
+
     public function __construct()
     {
         $this->electeurs = new ArrayCollection();
+        $this->elections = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -105,5 +109,35 @@ class Fokotany
     public function __toString()
     {
         return $this->nom;
+    }
+
+    /**
+     * @return Collection<int, Elections>
+     */
+    public function getElections(): Collection
+    {
+        return $this->elections;
+    }
+
+    public function addElection(Elections $election): static
+    {
+        if (!$this->elections->contains($election)) {
+            $this->elections->add($election);
+            $election->setFokotany($this);
+        }
+
+        return $this;
+    }
+
+    public function removeElection(Elections $election): static
+    {
+        if ($this->elections->removeElement($election)) {
+            // set the owning side to null (unless already changed)
+            if ($election->getFokotany() === $this) {
+                $election->setFokotany(null);
+            }
+        }
+
+        return $this;
     }
 }

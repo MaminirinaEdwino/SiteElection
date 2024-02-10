@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Motif{% endblock %}
+
+{% block body %}
+    <h1>Edit Motif</h1>
+
+    {{ include('motif/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_motif_index') }}">back to list</a>
+
+    {{ include('motif/_delete_form.html.twig') }}
+{% endblock %}

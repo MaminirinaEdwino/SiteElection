@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit NiveauAdmin{% endblock %}
+
+{% block body %}
+    <h1>Edit NiveauAdmin</h1>
+
+    {{ include('niveau_admin/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+
+    {{ include('niveau_admin/_delete_form.html.twig') }}
+{% endblock %}

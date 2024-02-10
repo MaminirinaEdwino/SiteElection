@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Motif{% endblock %}
+
+{% block body %}
+    <h1>Motif</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ motif.id }}</td>
+            </tr>
+            <tr>
+                <th>Motif</th>
+                <td>{{ motif.motif }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_motif_index') }}">back to list</a>
+
+    <a href="{{ path('app_motif_edit', {'id': motif.id}) }}">edit</a>
+
+    {{ include('motif/_delete_form.html.twig') }}
+{% endblock %}

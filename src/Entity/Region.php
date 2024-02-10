@@ -24,9 +24,13 @@ class Region
     #[ORM\OneToMany(targetEntity: District::class, mappedBy: 'Region')]
     private Collection $districts;
 
+    #[ORM\OneToMany(targetEntity: Elections::class, mappedBy: 'Region')]
+    private Collection $elections;
+
     public function __construct()
     {
         $this->districts = new ArrayCollection();
+        $this->elections = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -90,6 +94,36 @@ class Region
     public function __toString()
     {
         return $this->nom;
+    }
+
+    /**
+     * @return Collection<int, Elections>
+     */
+    public function getElections(): Collection
+    {
+        return $this->elections;
+    }
+
+    public function addElection(Elections $election): static
+    {
+        if (!$this->elections->contains($election)) {
+            $this->elections->add($election);
+            $election->setRegion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeElection(Elections $election): static
+    {
+        if ($this->elections->removeElement($election)) {
+            // set the owning side to null (unless already changed)
+            if ($election->getRegion() === $this) {
+                $election->setRegion(null);
+            }
+        }
+
+        return $this;
     }
     
 }

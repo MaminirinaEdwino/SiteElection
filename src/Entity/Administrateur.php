@@ -16,11 +16,12 @@ class Administrateur
     #[ORM\Column(length: 50)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $niveau = null;
 
     #[ORM\Column(length: 255)]
     private ?string $mdp = null;
+
+    #[ORM\ManyToOne(inversedBy: 'administrateurs')]
+    private ?NiveauAdmin $niveau = null;
 
 
     public function getId(): ?int
@@ -40,18 +41,6 @@ class Administrateur
         return $this;
     }
 
-    public function getNiveau(): ?string
-    {
-        return $this->niveau;
-    }
-
-    public function setNiveau(string $niveau): static
-    {
-        $this->niveau = $niveau;
-
-        return $this;
-    }
-
     public function getMdp(): ?string
     {
         return $this->mdp;
@@ -60,6 +49,18 @@ class Administrateur
     public function setMdp(string $mdp): static
     {
         $this->mdp = $mdp;
+
+        return $this;
+    }
+
+    public function getNiveau(): ?NiveauAdmin
+    {
+        return $this->niveau;
+    }
+
+    public function setNiveau(?NiveauAdmin $niveau): static
+    {
+        $this->niveau = $niveau;
 
         return $this;
     }
