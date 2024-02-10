@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Electeurs index{% endblock %}
+
+{% block body %}
+    <h1>Electeurs index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>CIN</th>
+                <th>Age</th>
+                <th>Adresse</th>
+                <th>Telephone</th>
+                <th>Mdp</th>
+                <th>Vote</th>
+                <th>Identifiant</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for electeur in electeurs %}
+            <tr>
+                <td>{{ electeur.id }}</td>
+                <td>{{ electeur.nom }}</td>
+                <td>{{ electeur.prenom }}</td>
+                <td>{{ electeur.CIN }}</td>
+                <td>{{ electeur.Age }}</td>
+                <td>{{ electeur.adresse }}</td>
+                <td>{{ electeur.telephone }}</td>
+                <td>{{ electeur.mdp }}</td>
+                <td>{{ electeur.vote ? 'Yes' : 'No' }}</td>
+                <td>{{ electeur.identifiant }}</td>
+                <td>
+                    <a href="{{ path('app_electeurs_show', {'id': electeur.id}) }}">show</a>
+                    <a href="{{ path('app_electeurs_edit', {'id': electeur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_electeurs_new') }}">Create new</a>
+{% endblock %}

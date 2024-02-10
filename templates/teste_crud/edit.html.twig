@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit TesteCrud{% endblock %}
+
+{% block body %}
+    <h1>Edit TesteCrud</h1>
+
+    {{ include('teste_crud/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_teste_crud_index') }}">back to list</a>
+
+    {{ include('teste_crud/_delete_form.html.twig') }}
+{% endblock %}

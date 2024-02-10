@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fokotany index{% endblock %}
+
+{% block body %}
+    <h1>Fokotany index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Code</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fokotany in fokotanies %}
+            <tr>
+                <td>{{ fokotany.id }}</td>
+                <td>{{ fokotany.nom }}</td>
+                <td>{{ fokotany.code }}</td>
+                <td>
+                    <a href="{{ path('app_fokotany_show', {'id': fokotany.id}) }}"
+                    class="btn btn-outline-primary">show</a>
+                    <a href="{{ path('app_fokotany_edit', {'id': fokotany.id}) }}"
+                    class="btn btn-outline-primary">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ path('app_fokotany_new') }}" class="btn btn-primary">Create new</a>
+{% endblock %}

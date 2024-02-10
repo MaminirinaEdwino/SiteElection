@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Electeurs{% endblock %}
+
+{% block body %}
+    <h1>Electeurs</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ electeur.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ electeur.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ electeur.prenom }}</td>
+            </tr>
+            <tr>
+                <th>CIN</th>
+                <td>{{ electeur.CIN }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ electeur.Age }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ electeur.adresse }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ electeur.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Mdp</th>
+                <td>{{ electeur.mdp }}</td>
+            </tr>
+            <tr>
+                <th>Vote</th>
+                <td>{{ electeur.vote ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Identifiant</th>
+                <td>{{ electeur.identifiant }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_electeurs_index') }}">back to list</a>
+
+    <a href="{{ path('app_electeurs_edit', {'id': electeur.id}) }}">edit</a>
+
+    {{ include('electeurs/_delete_form.html.twig') }}
+{% endblock %}

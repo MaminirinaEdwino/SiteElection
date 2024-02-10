@@ -1,0 +1,5 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <button class="btn btn-primary">{{ button_label|default('Save') }}</button>
+    <a href="{{ path('app_commune_index') }}" class="btn btn-outline-primary">back to list</a>
+{{ form_end(form) }}

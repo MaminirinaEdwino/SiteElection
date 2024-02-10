@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commune{% endblock %}
+
+{% block body %}
+    <h1>Commune</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ commune.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ commune.nom }}</td>
+            </tr>
+            <tr>
+                <th>Code</th>
+                <td>{{ commune.code }}</td>
+            </tr>
+            <tr>
+                <th>District</th>
+                <td>{{ commune.district }}</td>
+            </tr>
+            <tr>
+                <th>Région</th>
+                <td>
+                    {% for dist in district %}
+                        {% if dist.nom == commune.district %}
+                            {{ dist.region }}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_commune_index') }}" class="btn btn-outline-primary">back to list</a>
+
+    <a href="{{ path('app_commune_edit', {'id': commune.id}) }}" class="btn btn-outline-primary">edit</a>
+
+    {{ include('commune/_delete_form.html.twig') }}
+{% endblock %}

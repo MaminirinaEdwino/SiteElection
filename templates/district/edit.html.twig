@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit District{% endblock %}
+
+{% block body %}
+    <h1>Edit District</h1>
+
+    {{ include('district/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+    {{ include('district/_delete_form.html.twig') }}
+{% endblock %}
